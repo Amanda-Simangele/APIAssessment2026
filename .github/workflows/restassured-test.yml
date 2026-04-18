@@ -90,7 +90,7 @@ jobs:
         with:
           server_address: smtp.gmail.com
           server_port: 587
-          username: ${{ secrets.EMAIL_USERNAME }}
+          username: ${{ secrets.EMAIL_ADDRESS }}
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: Rest Assured Automation Test Results - Allure Report for 1st Group
           to: simangeleramavhale@gmail.com

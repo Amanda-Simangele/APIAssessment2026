@@ -69,36 +69,32 @@ jobs:
         if: always()
         run: |
           if [ -f target/surefire-reports/testng-results.xml ]; then
-           TOTAL=$(grep -oE 'total="[0-9]+"' target/surefire-reports/testng-results.xml | head -1 | grep -oE '[0-9]+')
-           PASSED=$(grep -oE 'passed="[0-9]+"' target/surefire-reports/testng-results.xml | head -1 | grep -oE '[0-9]+')
-           FAILED=$(grep -oE 'failed="[0-9]+"' target/surefire-reports/testng-results.xml | head -1 | grep -oE '[0-9]+')
-           SKIPPED=$(grep -oE 'skipped="[0-9]+"' target/surefire-reports/testng-results.xml | head -1 | grep -oE '[0-9]+')
-           echo "TEST_TOTAL=${TOTAL:-0}" >> $GITHUB_ENV
-           echo "TEST_PASSED=${PASSED:-0}" >> $GITHUB_ENV
-           echo "TEST_FAILED=${FAILED:-0}" >> $GITHUB_ENV
-           echo "TEST_SKIPPED=${SKIPPED:-0}" >> $GITHUB_ENV
-           else
-             echo "TEST_TOTAL=N/A" >> $GITHUB_ENV
-             echo "TEST_PASSED=N/A" >> $GITHUB_ENV
-             echo "TEST_FAILED=N/A" >> $GITHUB_ENV
-             echo "TEST_SKIPPED=N/A" >> $GITHUB_ENV
-           fi    
+            TOTAL=$(grep -oE 'total="[0-9]+"' target/surefire-reports/testng-results.xml | head -1 | grep -oE '[0-9]+')
+            PASSED=$(grep -oE 'passed="[0-9]+"' target/surefire-reports/testng-results.xml | head -1 | grep -oE '[0-9]+')
+            FAILED=$(grep -oE 'failed="[0-9]+"' target/surefire-reports/testng-results.xml | head -1 | grep -oE '[0-9]+')
+            SKIPPED=$(grep -oE 'skipped="[0-9]+"' target/surefire-reports/testng-results.xml | head -1 | grep -oE '[0-9]+')
+            echo "TEST_TOTAL=${TOTAL:-0}" >> $GITHUB_ENV
+            echo "TEST_PASSED=${PASSED:-0}" >> $GITHUB_ENV
+            echo "TEST_FAILED=${FAILED:-0}" >> $GITHUB_ENV
+            echo "TEST_SKIPPED=${SKIPPED:-0}" >> $GITHUB_ENV
+          else
+            echo "TEST_TOTAL=N/A" >> $GITHUB_ENV
+            echo "TEST_PASSED=N/A" >> $GITHUB_ENV
+            echo "TEST_FAILED=N/A" >> $GITHUB_ENV
+            echo "TEST_SKIPPED=N/A" >> $GITHUB_ENV
+          fi
 
       - name: Send Email with Emailable Report Attachment
         if: always()
         uses: dawidd6/action-send-mail@v3
         with:
-          # SMTP server configuration
-          server_address: smtp.gmail.com                    # Gmail SMTP server
-          server_port: 587                                  # TLS secure connection port
-          # Authentication credentials (stored in GitHub secrets for security)
-          username: ${{ secrets.EMAIL_USERNAME }}           # Gmail account email
-          password: ${{ secrets.EMAIL_PASSWORD }}           # Gmail app-specific password
-          # Email content
-          subject: Rest Assured Automation Test Results - Allure Report for 1st Group  # Email subject line
-          to: simangeleramavhale@gmail.com                  # Recipient email address
-          from: ${{ secrets.EMAIL_USERNAME }}               # Sender email address
-          # Message body with test execution details and formatting
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: Rest Assured Automation Test Results - Allure Report for 1st Group
+          to: simangeleramavhale@gmail.com
+          from: ${{ secrets.EMAIL_USERNAME }}
           body: |
             Hi Team,
 

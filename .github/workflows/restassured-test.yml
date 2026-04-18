@@ -99,7 +99,8 @@ jobs:
             Hi Team,
 
             ═══════════════════════════════════════════════════════════
-                          TEST EXECUTION REPORT#            ═══════════════════════════════════════════════════════════
+                          TEST EXECUTION REPORT
+            ═══════════════════════════════════════════════════════════
 
             Repository  :  ${{ github.repository }}
             Branch      :  ${{ github.ref_name }}

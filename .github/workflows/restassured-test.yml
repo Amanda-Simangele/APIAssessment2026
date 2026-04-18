@@ -94,7 +94,7 @@ jobs:
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: Rest Assured Automation Test Results - Allure Report for 1st Group
           to: simangeleramavhale@gmail.com
-          from: ${{ secrets.EMAIL_USERNAME }}
+          from: ${{ secrets.EMAIL_ADDRESS }}
           body: |
             Hi Team,
 

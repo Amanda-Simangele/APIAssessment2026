@@ -1,9 +1,18 @@
 package Test;
-
 import RequestBuilder.NdosiRequest;
+import Utils.DatabaseConnection;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.sql.SQLException;
+
 public class NdosiTests {
+
+    @BeforeClass
+    public void setup() throws SQLException {
+        DatabaseConnection.dbConnection();
+    }
+
 
    @Test(priority = 1)
     public static void CreateNewUserTest(){

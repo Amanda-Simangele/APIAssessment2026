@@ -4,14 +4,20 @@ import Common.Authorization;
 import Common.DataGenerator;
 import Common.URIs;
 import PayloadBuilder.NdosiPayload;
+import Utils.DatabaseConnection;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import org.testng.annotations.BeforeClass;
+
+import java.sql.SQLException;
 
 public class NdosiRequest {
 
     public static String authToken;
     public static String userId;
+
+
 
     // Method to create a new user registration and extract the user ID from the response
     public static Response createNdosiResponse(){
@@ -47,7 +53,7 @@ public class NdosiRequest {
                 .basePath("/login")
                 .contentType(ContentType.JSON)
                 .log().all()
-                .body(NdosiPayload.loginPayload("admin@gmail.com", "@12345678"))
+                .body(NdosiPayload.loginPayload(DatabaseConnection.getEmail, DatabaseConnection.getPassword))
                 .post()
                 .then()
                 .extract().response();
